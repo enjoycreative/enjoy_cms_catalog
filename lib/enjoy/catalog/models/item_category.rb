@@ -35,14 +35,14 @@ module Enjoy::Catalog
         item_class.any_in(item_category_ids: self.self_and_descendants.map(&:id))
       end
 
-      # module ClassMethods
-      #   def rails_admin_add_fields
-      #     {}
-      #   end
-      #
-      #   def rails_admin_add_config(config)
-      #   end
-      # end
+      module ClassMethods
+        def rails_admin_add_fields
+          {}
+        end
+
+        def rails_admin_add_config(config)
+        end
+      end
 
     end
   end
