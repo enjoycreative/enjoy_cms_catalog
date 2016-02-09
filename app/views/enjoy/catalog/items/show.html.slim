@@ -1,0 +1,32 @@
+= render partial: "/blocks/seo_block_with_obj", locals: {obj: @item}
+
+/ .item_fulltitle=@item.full_name
+.item_title= @item.name
+
+.item_photoblock
+  .item_image_block
+    = image_tag @item.image.url(:main), title: @item.name, alt: @item.name, data: {big_image_url: @item.image.url(:big)}
+
+    
+.item_block
+  = link_to enjoy_cms_catalog.item_path(@item), title: @item.name do
+    .i_block
+
+
+    .i_img_block
+
+        .i_image_block
+          = image_tag @item.image.url(:main), alt: @item.name, title: @item.name
+
+        .i_block_mask
+          .i_block_mask-1
+          .i_block_mask-2
+
+    .i_text_block
+      h4.i_title_block
+        = @item.name
+      / h5.i_fullname
+      /   =@item.full_name
+      hr
+      .i_excerpt_block
+        == @item.excerpt

@@ -1,0 +1,29 @@
+= render partial: "blocks/seo_block"
+
+.ic_content
+  //- @item_categories.each do |ic|
+  - unless @root_catalog.blank?
+
+    - @root_catalog.each do |ic|
+
+      .ic_block
+
+        = link_to enjoy_cms_catalog.item_category_path(ic), title: ic.name do
+
+          .ic_img_block
+
+            .ic_image_block
+              = image_tag ic.image.url(:main), alt: ic.name, title: ic.name
+
+            .ic_block_mask
+              .ic_block_mask-1
+              .ic_block_mask-2
+
+          .ic_text_block
+           h3.ic_title_block
+             = ic.name
+           //.ic_excerpt_block
+             == ic.excerpt
+
+
+        .cf{style="clear: both"}

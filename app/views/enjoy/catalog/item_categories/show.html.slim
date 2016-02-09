@@ -1,0 +1,84 @@
+= render partial: "blocks/seo_block_with_obj", locals: {obj: @item_category}
+
+
+.ic_content
+  //- @item_categories.each do |ic|
+  //- root_catalog = ItemCategory.enabled.roots.sorted.all.to_a
+  //- unless root_catalog.blank?
+  
+    //- root_catalog.each do |ic|
+  - label = @item_category.name
+  h3.icpage_title = label
+
+  - unless @item_category.content.blank?
+    .ic_description_block
+      == @item_category.content
+      - if @children.blank? or @items.blank?
+        hr
+
+  - unless @children.blank?
+    .icc_block
+      - @children.each do |icc|
+
+        .ic_block
+
+          = link_to enjoy_cms_catalog.item_category_path(icc), title: icc.name do
+
+            .ic_img_block
+
+              .ic_image_block
+                = image_tag icc.image.url(:main), alt: icc.name, title: icc.name
+
+              .ic_block_mask
+                .ic_block_mask-1
+                .ic_block_mask-2
+
+            .ic_text_block
+              h3.ic_title_block
+                = icc.name
+          //.ic_excerpt_block
+               == ic.excerpt
+
+
+          .cf{style="clear: both"}
+    br
+    - unless @items.blank?
+      hr
+    br
+  //- items = @item_category.items.enabled.sorted.all.to_a
+  - unless @items.blank?
+    .items_block
+      - @items.each do |i|
+
+
+        .item_block
+          = link_to enjoy_cms_catalog.item_path(i), title: i.name do
+            .i_block
+
+
+
+              .i_img_block
+
+                .i_image_block
+                  = image_tag i.image.url(:main), alt: i.name, title: i.name
+
+                .i_block_mask
+                  .i_block_mask-1
+                  .i_block_mask-2
+
+            .i_text_block
+              h4.i_title_block
+                = i.name
+              / h5.i_fullname
+              /   =i.full_name
+              hr
+              .i_excerpt_block
+                == i.excerpt
+
+
+          .cf{style="clear: both"}
+
+
+  / - if @children.blank? and items.blank? and @item_category.content.blank?
+    .items_block
+      h3= Settings.ns('item_categories').empty_category(default: "Приносим свои извинения. Страница находится на стадии разработки.", label: "Сообщение об отсутсвии товаров в категории", kind: :text)

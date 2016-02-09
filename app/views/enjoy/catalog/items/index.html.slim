@@ -1,0 +1,28 @@
+= render partial: "blocks/seo_block_with_obj", locals: {obj: @item}
+
+
+.i_content
+  - unless @items.blank?
+    - @items.each do |i|
+      .item_block
+        = link_to enjoy_cms_catalog.item_path(i), title: i.name do
+          .i_block
+
+
+          .i_img_block
+
+              .i_image_block
+                = image_tag i.image.url(:main), alt: i.name, title: i.name
+
+              .i_block_mask
+                .i_block_mask-1
+                .i_block_mask-2
+
+          .i_text_block
+            h4.i_title_block
+              = i.name
+            / h5.i_fullname
+            /   =i.full_name
+            hr
+            .i_excerpt_block
+              == i.excerpt
