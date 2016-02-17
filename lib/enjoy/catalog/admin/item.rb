@@ -34,8 +34,8 @@ module Enjoy::Catalog
               end
             end
             field :item_categories
-            field :excerpt, :ck_editor
-            field :content, :ck_editor
+            field :excerpt, :enjoy_html
+            field :content, :enjoy_html
 
             field :item_images
 

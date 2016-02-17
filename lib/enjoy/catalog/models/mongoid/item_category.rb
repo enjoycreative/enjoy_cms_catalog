@@ -5,6 +5,8 @@ module Enjoy::Catalog
         extend ActiveSupport::Concern
         include Enjoy::MongoidPaperclip
 
+        include Enjoy::HtmlField
+
         included do
           field :name, type: String, localize: Enjoy.configuration.localize, default: ""
 
@@ -16,12 +18,20 @@ module Enjoy::Catalog
           acts_as_nested_set
           scope :sorted, -> { order_by([:lft, :asc]) }
 
-          field :excerpt,   type: String, localize: Enjoy.configuration.localize, default: ""
-          field :content,   type: String, localize: Enjoy.configuration.localize, default: ""
+          enjoy_cms_html_field :excerpt,   type: String, localize: Enjoy.configuration.localize, default: ""
+          enjoy_cms_html_field :content,   type: String, localize: Enjoy.configuration.localize, default: ""
 
           embeds_many :item_category_images, cascade_callbacks: true, class_name: "Enjoy::Catalog::ItemCategoryImage"
           alias :images :item_category_images
           accepts_nested_attributes_for :item_category_images, allow_destroy: true
+        end
+
+        def items
+          item_class.in(item_category_ids: self.id)
+        end
+
+        def all_items
+          item_class.any_in(item_category_ids: self.self_and_descendants.map(&:id))
         end
 
         def image_styles

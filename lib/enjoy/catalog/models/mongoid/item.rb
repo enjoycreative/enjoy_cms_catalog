@@ -5,9 +5,9 @@ module Enjoy::Catalog
         extend ActiveSupport::Concern
         include Enjoy::MongoidPaperclip
 
-        included do
-          # default_scope -> { unscoped.any_of( {_type: nil}, {type: ""}, {_type: "Enjoy::Catalog::Item"} ) }
+        include Enjoy::HtmlField
 
+        included do
           field :name, type: String, localize: Enjoy.configuration.localize, default: ""
 
           enjoy_cms_mongoid_attached_file(:image,
@@ -18,10 +18,11 @@ module Enjoy::Catalog
           acts_as_nested_set
           scope :sorted, -> { order_by([:lft, :asc]) }
 
-          field :excerpt,   type: String, localize: Enjoy.configuration.localize, default: ""
-          field :content,   type: String, localize: Enjoy.configuration.localize, default: ""
+          enjoy_cms_html_field :excerpt,   type: String, localize: Enjoy.configuration.localize, default: ""
+          enjoy_cms_html_field :content,   type: String, localize: Enjoy.configuration.localize, default: ""
 
           has_and_belongs_to_many :item_categories, class_name: "Enjoy::Catalog::ItemCategory", inverse_of: nil
+          alias :categories :item_categories
 
           embeds_many :item_images, cascade_callbacks: true, class_name: "Enjoy::Catalog::ItemImage"
           alias :images :item_images

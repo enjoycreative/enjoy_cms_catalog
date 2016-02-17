@@ -31,12 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
 
-  spec.add_dependency 'rails', '>= 4.1.0', '< 5.0'
-
   spec.add_dependency 'money-rails'
   spec.add_dependency 'mongoid_money_field'
 
-  spec.add_dependency 'enjoy_cms'
-  spec.add_dependency 'rails_admin_sort_embedded'
-  spec.add_dependency 'ack_rails_admin_jcrop'
+  spec.add_dependency 'enjoy_cms', "~> 0.3.0"
 end

@@ -4,7 +4,7 @@ module Enjoy::Catalog
       extend ActiveSupport::Concern
 
       def index
-        @items = item_class.enabled.sorted.to_a
+        @z = item_class.enabled.sorted.to_a
         # index_crumbs
       end
 

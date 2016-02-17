@@ -15,8 +15,10 @@ module Enjoy::Catalog
               read_only true
 
               pretty_value do
-                bindings[:object].items.to_a.map { |h|
-                  (bindings[:view] || bindings[:controller]).link_to(h.name, (bindings[:view] || bindings[:controller]).rails_admin.show_path(model_name: "item", id: h.id), title: h.name)
+                bindings[:object].items.to_a.map { |i|
+                  route = (bindings[:view] || bindings[:controller])
+                  model_name = i.rails_admin_model
+                  route.link_to(i.name, route.rails_admin.show_path(model_name: model_name, id: i.id), title: i.name)
                 }.join("<br>").html_safe
               end
             end
@@ -42,8 +44,8 @@ module Enjoy::Catalog
                 :image_jcrop_options
               end
             end
-            field :excerpt, :ck_editor
-            field :content, :ck_editor
+            field :excerpt, :enjoy_html
+            field :content, :enjoy_html
 
             field :item_category_images
 
@@ -77,8 +79,10 @@ module Enjoy::Catalog
               help 'Список товаров'
 
               pretty_value do
-                bindings[:object].items.to_a.map { |h|
-                  (bindings[:view] || bindings[:controller]).link_to(h.name, (bindings[:view] || bindings[:controller]).rails_admin.edit_path(model_name: "item", id: h.id), title: h.name)
+                bindings[:object].items.to_a.map { |i|
+                  route = (bindings[:view] || bindings[:controller])
+                  model_name = i.rails_admin_model
+                  route.link_to(i.name, route.rails_admin.show_path(model_name: model_name, id: i.id), title: i.name)
                 }.join("<br>").html_safe
               end
             end
@@ -108,8 +112,10 @@ module Enjoy::Catalog
               read_only true
 
               pretty_value do
-                bindings[:object].items.to_a.map { |h|
-                  (bindings[:view] || bindings[:controller]).link_to(h.name, (bindings[:view] || bindings[:controller]).rails_admin.show_path(model_name: "item", id: h.id), title: h.name)
+                  bindings[:object].items.to_a.map { |i|
+                    route = (bindings[:view] || bindings[:controller])
+                    model_name = i.rails_admin_model
+                    route.link_to(i.name, route.rails_admin.show_path(model_name: model_name, id: i.id), title: i.name)
                 }.join("<br>").html_safe
               end
             end
