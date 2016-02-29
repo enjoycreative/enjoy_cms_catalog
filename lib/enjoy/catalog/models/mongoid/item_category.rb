@@ -8,6 +8,10 @@ module Enjoy::Catalog
         include Enjoy::HtmlField
 
         included do
+          if defined?(RailsAdminComments)
+            include RailsAdminComments::Commentable
+          end
+          
           field :name, type: String, localize: Enjoy.configuration.localize, default: ""
 
           enjoy_cms_mongoid_attached_file(:image,
