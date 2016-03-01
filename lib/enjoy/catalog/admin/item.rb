@@ -16,26 +16,38 @@ module Enjoy::Catalog
           edit do
             field :enabled, :toggle
             field :name
-            field :slugs, :enum do
-              enum_method do
-                :slugs
-              end
-              visible do
-                bindings[:view].current_user.admin?
-              end
-              multiple do
-                true
-              end
-            end
-            field :text_slug
-            field :image, :jcrop do
-              jcrop_options do
-                :image_jcrop_options
-              end
-            end
             field :item_categories
-            field :excerpt, :enjoy_html
-            field :content, :enjoy_html
+
+            group :URL do
+              active false
+              field :slugs, :enum do
+                enum_method do
+                  :slugs
+                end
+                visible do
+                  bindings[:view].current_user.admin?
+                end
+                multiple do
+                  true
+                end
+              end
+              field :text_slug
+            end
+
+            group :image do
+              active false
+              field :image, :jcrop do
+                jcrop_options do
+                  :image_jcrop_options
+                end
+              end
+            end
+
+            group :content do
+              active false
+              field :excerpt, :enjoy_html
+              field :content, :enjoy_html
+            end
 
             field :item_images
 
