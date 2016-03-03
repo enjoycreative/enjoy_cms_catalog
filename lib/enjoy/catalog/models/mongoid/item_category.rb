@@ -11,7 +11,7 @@ module Enjoy::Catalog
           if defined?(RailsAdminComments)
             include RailsAdminComments::Commentable
           end
-          
+
           field :name, type: String, localize: Enjoy.configuration.localize, default: ""
 
           enjoy_cms_mongoid_attached_file(:image,
@@ -40,6 +40,10 @@ module Enjoy::Catalog
 
         def image_styles
           Enjoy::Catalog.configuration.item_category_image_styles
+        end
+
+        def image_jcrop_options
+          {}
         end
       end
     end

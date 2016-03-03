@@ -1,0 +1,30 @@
+class <%= camelcased_class_name %> < Enjoy::Catalog::ItemCategory
+
+  embeds_many :item_category_images, cascade_callbacks: true, class_name: "<%= camelcased_class_name %>Image"
+  alias :<%= underscored_class_name %>_images :item_category_images
+
+  def image_styles
+    {}
+  end
+
+  def image_jcrop_options
+    {}
+  end
+
+  def item_class
+    <%= item_class_name %>
+  end
+
+
+  ############# rails_admin ##############
+  def self.rails_admin_add_fields
+    {}
+  end
+
+  def self.rails_admin_add_config(config)
+  end
+
+  rails_admin(&Enjoy::Catalog::Admin::ItemCategory.config(rails_admin_add_fields) { |config|
+    rails_admin_add_config(config)
+  })
+end

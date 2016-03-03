@@ -15,14 +15,6 @@ module Enjoy::Catalog
         manual_slug :name
       end
 
-      def clean_excerpt
-        Rails::Html::FullSanitizer.new.sanitize(self.excerpt.strip)
-      end
-
-      def clean_content
-        Rails::Html::FullSanitizer.new.sanitize(self.content.strip)
-      end
-
       def item_class
         Enjoy::Catalog::Item
       end

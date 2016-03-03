@@ -1,0 +1,10 @@
+class <%= camelcased_pluralized_class_name %>Controller < Enjoy::Catalog::ItemsController
+
+  private
+  def item_category_class
+    <%= item_category_class_name %>
+  end
+  def item_class
+    <%= camelcased_class_name %>
+  end
+end

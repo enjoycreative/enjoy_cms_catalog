@@ -13,18 +13,6 @@ module Enjoy::Catalog
 
       included do
         manual_slug :name
-
-        rails_admin(&Enjoy::Catalog::Admin::Item.config(rails_admin_add_fields) { |config|
-          rails_admin_add_config(config)
-        })
-      end
-
-      def clean_excerpt
-        Rails::Html::FullSanitizer.new.sanitize(self.excerpt.strip)
-      end
-
-      def clean_content
-        Rails::Html::FullSanitizer.new.sanitize(self.content.strip)
       end
     end
   end

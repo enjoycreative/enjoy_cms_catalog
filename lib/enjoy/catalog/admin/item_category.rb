@@ -28,6 +28,7 @@ module Enjoy::Catalog
             field :enabled, :toggle
             field :name
             group :URL do
+              active false
               field :slugs, :enum do
                 enum_method do
                   :slugs
@@ -55,17 +56,7 @@ module Enjoy::Catalog
 
             field :item_category_images
 
-            fields.each_pair do |name, type|
-              if type.nil?
-                field name
-              else
-                if type.is_a?(Array)
-                  field name, type[0], &type[1]
-                else
-                  field name, type
-                end
-              end
-            end
+            Enjoy::RailsAdminGroupPatch::enjoy_cms_group(self, fields)
 
             group :seo do
               active false
@@ -99,7 +90,6 @@ module Enjoy::Catalog
 
           show do
             field :name
-            field :sidebar_title
             field :slugs, :enum do
               enum_method do
                 :slugs
@@ -116,6 +106,8 @@ module Enjoy::Catalog
             field :image
             field :excerpt
             field :content
+
+            Enjoy::RailsAdminGroupPatch::enjoy_cms_group(self, fields)
 
             field :items do
               read_only true
