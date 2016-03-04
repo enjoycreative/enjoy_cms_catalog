@@ -14,6 +14,9 @@ class <%= camelcased_class_name %> < Enjoy::Catalog::ItemCategory
   def item_class
     <%= item_class_name %>
   end
+  def routes_namespace
+    :main_app # or nil
+  end
 
 
   ############# rails_admin ##############

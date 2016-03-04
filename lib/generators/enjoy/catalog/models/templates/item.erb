@@ -17,6 +17,11 @@ class <%= camelcased_class_name %> < Enjoy::Catalog::Item
     {}
   end
 
+  
+  def routes_namespace
+    :main_app # or nil
+  end
+
 
   ############# rails_admin ##############
   def self.rails_admin_add_fields

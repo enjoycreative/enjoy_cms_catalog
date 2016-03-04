@@ -10,6 +10,7 @@ module Enjoy::Catalog
             field :enabled, :toggle
             field :name
             field :image
+            field :connected_pages, :enjoy_connectable
 
             field :items do
               read_only true
@@ -27,6 +28,7 @@ module Enjoy::Catalog
           edit do
             field :enabled, :toggle
             field :name
+            field :connected_pages, :enjoy_connectable
             group :URL do
               active false
               field :slugs, :enum do

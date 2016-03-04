@@ -6,6 +6,7 @@ module Enjoy::Catalog
       include Enjoy::Enableable
       include Enjoy::Seoable
       include Enjoy::SitemapDataField
+      include Enjoy::Connectable
 
       include Enjoy::Catalog.orm_specific('ItemCategory')
 
@@ -13,6 +14,8 @@ module Enjoy::Catalog
 
       included do
         manual_slug :name
+
+        enjoy_connectable_field :connected_pages, routes_namespace: :enjoy_cms_catalog
       end
 
       def item_class

@@ -10,12 +10,14 @@ module Enjoy::Catalog
             field :name
             field :price
             field :item_categories
+            field :connected_pages, :enjoy_connectable
             field :image
           end
 
           edit do
             field :enabled, :toggle
             field :name
+            field :connected_pages, :enjoy_connectable
             field :item_categories
 
             group :URL do
