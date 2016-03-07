@@ -5,7 +5,7 @@
   - unless @items.blank?
     - @items.each do |i|
       .item_block
-        = link_to enjoy_cms_catalog.item_path(i), title: i.name do
+        = link_to i, title: i.name do
           .i_block
 
 

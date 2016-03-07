@@ -34,5 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'money-rails'
   spec.add_dependency 'mongoid_money_field'
 
-  spec.add_dependency 'enjoy_cms', "~> 0.3.4"
+  spec.add_dependency 'enjoy_cms', "~> 0.3.5"
 end

@@ -1,8 +1,11 @@
 require "enjoy/catalog/version"
 
+require 'enjoy/catalog/routes'
+
 require 'money-rails'
 
-require 'enjoy_cms_mongoid'
+require 'enjoy_cms'
+
 require 'rails_admin_sort_embedded'
 require 'rails_admin_jcrop'
 

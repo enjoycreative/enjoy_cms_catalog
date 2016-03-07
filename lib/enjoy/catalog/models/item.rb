@@ -15,7 +15,7 @@ module Enjoy::Catalog
       included do
         manual_slug :name
 
-        enjoy_connectable_field :connected_pages, routes_namespace: :enjoy_cms_catalog
+        enjoy_connectable_field :connected_pages
       end
     end
   end
