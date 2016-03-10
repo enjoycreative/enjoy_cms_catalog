@@ -1,0 +1,16 @@
+ru:
+  mongoid:
+    models:
+      enjoy/catalog/item: Товары
+      enjoy/catalog/item_category: Разделы
+    attributes:
+      enjoy/catalog/item:
+        price: Цена
+        connected_pages: Страницы в меню
+        item_categories: Разделы
+        item_images: Галерея
+        related_items: Похожие товары
+      enjoy/catalog/item_category:
+        connected_pages: Страницы в меню
+        items: Товары
+        item_category_images: Галерея
