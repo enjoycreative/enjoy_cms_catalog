@@ -7,22 +7,13 @@ module Enjoy::Catalog
           list do
             scopes [:sorted, :enabled, nil]
 
-            field :enabled, :toggle
-            field :name
-            field :image
-            field :connected_pages, :enjoy_connectable
-
-            field :items do
-              read_only true
-
-              pretty_value do
-                bindings[:object].items.to_a.map { |i|
-                  route = (bindings[:view] || bindings[:controller])
-                  model_name = i.rails_admin_model
-                  route.link_to(i.name, route.rails_admin.show_path(model_name: model_name, id: i.id), title: i.name)
-                }.join("<br>").html_safe
-              end
+            field :enabled, :toggle do
+              searchable false
             end
+            field :name do
+              searchable true
+            end
+            field :connected_pages, :enjoy_connectable
           end
 
           edit do
@@ -44,10 +35,16 @@ module Enjoy::Catalog
               end
               field :text_slug
             end
-            field :image, :jcrop do
-              jcrop_options do
-                :image_jcrop_options
+
+
+            group :image do
+              active false
+              field :image, :jcrop do
+                jcrop_options do
+                  :image_jcrop_options
+                end
               end
+              field :item_category_images
             end
 
             group :content do
@@ -55,8 +52,6 @@ module Enjoy::Catalog
               field :excerpt, :enjoy_html
               field :content, :enjoy_html
             end
-
-            field :item_category_images
 
             Enjoy::RailsAdminGroupPatch::enjoy_cms_group(self, fields)
 
