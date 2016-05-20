@@ -1,9 +1,9 @@
 class <%= camelcased_class_name %> < Enjoy::Catalog::ItemImage
-  embedded_in :item, class_name: "<%= item_class_name %>"
+  embedded_in :item, class_name: "<%= camelcased_item_class_name %>"
   alias :<%= underscored_class_name %> :item
 
   def self.find(id)
-    find_through(<%= item_class_name %>, 'item_images', id)
+    find_through(<%= camelcased_item_class_name %>, 'item_images', id)
   end
 
   def image_styles
@@ -23,7 +23,7 @@ class <%= camelcased_class_name %> < Enjoy::Catalog::ItemImage
   def self.rails_admin_add_config(config)
   end
 
-  rails_admin(&Enjoy::Catalog::Admin::ItemImage.config(rails_admin_add_fields) { |config|
+  rails_admin(&Enjoy::Catalog::Admin::ItemImage.config(nil, rails_admin_add_fields) { |config|
     rails_admin_add_config(config)
   })
 

@@ -1,14 +1,14 @@
 require 'rails/generators'
 
-module Enjoy::Catalog::Models
-  class ItemCategoryGenerator < Rails::Generators::Base
+module Enjoy::Catalog::Controllers
+  class CategoryGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
     argument :class_name, type: :string
     argument :item_class_name_arg, type: :string, default: ""
 
-    desc 'Enjoy::Catalog ItemCategory Model generator'
-    def item_category
-      template 'item_category.erb', "app/models/#{file_name}.rb"
+    desc 'Enjoy::Catalog Category Controller generator'
+    def category
+      template 'categories_controller.erb', "app/controllers/#{file_name}_controller.rb"
     end
 
     private
@@ -20,8 +20,12 @@ module Enjoy::Catalog::Models
       class_name.camelcase
     end
 
+    def camelcased_pluralized_class_name
+      camelcased_class_name.pluralize
+    end
+
     def file_name
-      underscored_class_name
+      underscored_pluralized_class_name
     end
 
     def underscored_class_name

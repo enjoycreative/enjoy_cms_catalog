@@ -3,6 +3,8 @@ module Enjoy::Catalog
     module Item
       def self.config(fields = {})
         Proc.new {
+          navigation_label I18n.t("enjoy.catalog")
+
           list do
             scopes [:sorted, :enabled, nil]
 
@@ -12,24 +14,31 @@ module Enjoy::Catalog
             field :name do
               searchable true
             end
-            field :item_categories do
+            field :categories do
               searchable :name
             end
-            field :connected_pages, :enjoy_connectable
+            if Enjoy::Catalog.config.pages_support and Enjoy::Catalog.configuration.can_connect_items_with_pages
+              field :connected_pages, :enjoy_connectable
+            end
           end
 
           edit do
             field :enabled, :toggle
             field :name
-            field :connected_pages, :enjoy_connectable do
-              read_only do
-                !bindings[:view].current_user.admin?
+            if Enjoy::Catalog.config.pages_support and Enjoy::Catalog.configuration.can_connect_items_with_pages
+              group :connected_pages do
+                active false
+                field :connected_pages, :enjoy_connectable do
+                  read_only do
+                    !bindings[:view].current_user.admin?
+                  end
+                end
               end
             end
-            field :item_categories do
+            field :categories do
               searchable :name
             end
-            field :price
+            field :price, :string
 
             group :URL do
               active false

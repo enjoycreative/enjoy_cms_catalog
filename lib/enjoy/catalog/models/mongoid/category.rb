@@ -1,9 +1,8 @@
 module Enjoy::Catalog
   module Models
     module Mongoid
-      module Item
+      module Category
         extend ActiveSupport::Concern
-
         include Enjoy::HtmlField
 
         included do
@@ -15,15 +14,17 @@ module Enjoy::Catalog
           enjoy_cms_html_field :excerpt,   type: String, localize: Enjoy::Catalog.configuration.localize, default: ""
           enjoy_cms_html_field :content,   type: String, localize: Enjoy::Catalog.configuration.localize, default: ""
 
-          has_and_belongs_to_many :categories, class_name: "Enjoy::Catalog::Category", inverse_of: nil
+          embeds_many :category_images, cascade_callbacks: true, class_name: "Enjoy::Catalog::CategoryImage"
+          alias :images :category_images
+          accepts_nested_attributes_for :category_images, allow_destroy: true
+        end
 
-          embeds_many :item_images, cascade_callbacks: true, class_name: "Enjoy::Catalog::ItemImage"
-          alias :images :item_images
-          accepts_nested_attributes_for :item_images, allow_destroy: true
+        def items
+          item_class.in(category_ids: self.id)
+        end
 
-          has_and_belongs_to_many :related_items, :class_name => "Enjoy::Catalog::Item", :inverse_of => :related_items
-
-          field :price,     type: Money,    default: nil, localize: Enjoy::Catalog.configuration.localize
+        def all_items
+          item_class.any_in(category_ids: self.self_and_descendants.map(&:id))
         end
       end
     end

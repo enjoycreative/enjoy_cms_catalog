@@ -1,5 +1,5 @@
 module Enjoy::Catalog::Decorators
-  module ItemCategories
+  module Categories
     extend ActiveSupport::Concern
   end
 end

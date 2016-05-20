@@ -31,8 +31,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
 
-  spec.add_dependency 'money-rails'
-  spec.add_dependency 'mongoid_money_field'
+  spec.add_dependency 'enjoy_cms_gallery', "~> 0.4.0.beta1"
 
-  spec.add_dependency 'enjoy_cms', "~> 0.3.7"
+  # spec.add_dependency 'money', '6.7.0'
+  spec.add_dependency 'money-rails'
+  spec.add_dependency 'mongoid_money_field', '~> 5.0.0'
+
+  spec.add_dependency 'kaminari'
 end

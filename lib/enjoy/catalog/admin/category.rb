@@ -1,8 +1,9 @@
 module Enjoy::Catalog
   module Admin
-    module ItemCategory
+    module Category
       def self.config(fields = {})
         Proc.new {
+          navigation_label I18n.t("enjoy.catalog")
 
           list do
             scopes [:sorted, :enabled, nil]
@@ -13,13 +14,24 @@ module Enjoy::Catalog
             field :name do
               searchable true
             end
-            field :connected_pages, :enjoy_connectable
+            if Enjoy::Catalog.config.pages_support and Enjoy::Catalog.configuration.can_connect_category_with_pages
+              field :connected_pages, :enjoy_connectable
+            end
           end
 
           edit do
             field :enabled, :toggle
             field :name
-            field :connected_pages, :enjoy_connectable
+            if Enjoy::Catalog.config.pages_support and Enjoy::Catalog.configuration.can_connect_category_with_pages
+              group :connected_pages do
+                active false
+                field :connected_pages, :enjoy_connectable do
+                  read_only do
+                    !bindings[:view].current_user.admin?
+                  end
+                end
+              end
+            end
             group :URL do
               active false
               field :slugs, :enum do
@@ -44,7 +56,7 @@ module Enjoy::Catalog
                   :image_jcrop_options
                 end
               end
-              field :item_category_images
+              field :category_images
             end
 
             group :content do
@@ -110,10 +122,10 @@ module Enjoy::Catalog
               read_only true
 
               pretty_value do
-                  bindings[:object].items.to_a.map { |i|
-                    route = (bindings[:view] || bindings[:controller])
-                    model_name = i.rails_admin_model
-                    route.link_to(i.name, route.rails_admin.show_path(model_name: model_name, id: i.id), title: i.name)
+                bindings[:object].items.to_a.map { |i|
+                  route = (bindings[:view] || bindings[:controller])
+                  model_name = i.rails_admin_model
+                  route.link_to(i.name, route.rails_admin.show_path(model_name: model_name, id: i.id), title: i.name)
                 }.join("<br>").html_safe
               end
             end
@@ -123,14 +135,14 @@ module Enjoy::Catalog
 
           sort_embedded(
               {
-                  fields: [:item_category_images]
+                  fields: [:category_images]
               }
           )
 
           if defined?(RailsAdminMultipleFileUpload)
             multiple_file_upload(
                 {
-                    fields: [:item_category_images]
+                    fields: [:category_images]
                 }
             )
           end

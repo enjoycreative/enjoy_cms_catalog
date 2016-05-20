@@ -11,9 +11,9 @@ module Enjoy::Catalog::Models
     desc 'Enjoy::Catalog Models generator'
     def all
       generate "enjoy:catalog:models:item #{camelcased_class_name}"
-      generate "enjoy:catalog:models:item_category #{category_class_name}"
+      generate "enjoy:catalog:models:category #{category_class_name}"
       generate "enjoy:catalog:models:item_image #{image_class_name}"
-      generate "enjoy:catalog:models:item_category_image #{category_image_class_name}"
+      generate "enjoy:catalog:models:category_image #{category_image_class_name}"
     end
 
     private

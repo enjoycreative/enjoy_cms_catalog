@@ -4,7 +4,7 @@ module Enjoy::Catalog::Controllers
   class ItemGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
     argument :class_name, type: :string
-    argument :item_category_class_name_arg, type: :string, default: ""
+    argument :category_class_name_arg, type: :string, default: ""
 
     desc 'Enjoy::Catalog Item Controller generator'
     def item
@@ -36,8 +36,8 @@ module Enjoy::Catalog::Controllers
       underscored_class_name.pluralize
     end
 
-    def item_category_class_name
-      item_category_class_name_arg.blank? ? "#{camelcased_class_name}Category" : item_category_class_name_arg
+    def category_class_name
+      category_class_name_arg.blank? ? "#{camelcased_class_name}Category" : category_class_name_arg
     end
   end
 end

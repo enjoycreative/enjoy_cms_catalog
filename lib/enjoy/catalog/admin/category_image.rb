@@ -1,6 +1,6 @@
 module Enjoy::Catalog
   module Admin
-    module ItemImage
+    module CategoryImage
       def self.config(nav_label = nil, fields = {})
         if Enjoy::Catalog.config.gallery_support
           if Enjoy::Catalog.mongoid?
@@ -19,13 +19,13 @@ module Enjoy::Catalog
                 yield config
               end
             else
-              Enjoy::Gallery::Admin::Image.config(nav_label, fields)
+              Enjoy::Gallery::Admin::Image.config(nav_label,fields)
             end
           end #if Enjoy::Catalog.mongoid?
         end #if Enjoy::Catalog.config.gallery_support
 
       end #def self.config(fields = {})
 
-    end #module ItemImage
+    end #module CategoryImage
   end #module Admin
 end #module Enjoy::Catalog

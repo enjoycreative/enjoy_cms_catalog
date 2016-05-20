@@ -1,10 +1,11 @@
 class <%= camelcased_class_name %> < Enjoy::Catalog::Item
 
-  has_and_belongs_to_many :item_categories, class_name: "<%= camelcased_class_name %>Category", inverse_of: nil
-  alias :<%= underscored_class_name %>_categories :item_categories
+  has_and_belongs_to_many :categories, class_name: "<%= camelcased_class_name %>Category", inverse_of: nil
+  alias :<%= underscored_class_name %>_categories :categories
 
   embeds_many :item_images, cascade_callbacks: true, class_name: "<%= camelcased_class_name %>Image"
   alias :<%= underscored_class_name %>_images :item_images
+  accepts_nested_attributes_for :item_images, allow_destroy: true
 
   has_and_belongs_to_many :related_items, :class_name => "<%= camelcased_class_name %>", :inverse_of => :related_items
   alias :related_<%= underscored_pluralized_class_name %> :related_items
@@ -17,7 +18,7 @@ class <%= camelcased_class_name %> < Enjoy::Catalog::Item
     {}
   end
 
-  
+
   def routes_namespace
     :main_app # or nil
   end

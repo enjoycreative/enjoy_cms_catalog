@@ -9,7 +9,7 @@ module Enjoy::Catalog::Controllers
     desc 'Enjoy::Catalog Controllers generator'
     def all
       generate "enjoy:catalog:controllers:item #{camelcased_class_name}"
-      generate "enjoy:catalog:controllers:item_category #{category_class_name}"
+      generate "enjoy:catalog:controllers:category #{category_class_name}"
     end
 
     private

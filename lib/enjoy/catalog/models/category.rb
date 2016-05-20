@@ -1,6 +1,6 @@
 module Enjoy::Catalog
   module Models
-    module Item
+    module Category
       extend ActiveSupport::Concern
       include Enjoy::Model
       include Enjoy::Enableable
@@ -15,31 +15,36 @@ module Enjoy::Catalog
         include Enjoy::Gallery::Paperclipable
       end
 
-      include Enjoy::Catalog.orm_specific('Item')
+      include Enjoy::Catalog.orm_specific('Category')
 
       include ManualSlug
 
       included do
         manual_slug :name
 
-        if Enjoy::Catalog.config.pages_support and Enjoy::Catalog.configuration.can_connect_items_with_pages
+        if Enjoy::Catalog.config.pages_support and Enjoy::Catalog.configuration.can_connect_category_with_pages
           enjoy_connectable_field :connected_pages
         end
 
-        if Enjoy::Catalog.config.gallery_support and Enjoy::Catalog.configuration.item_image_styles
+        if Enjoy::Catalog.config.gallery_support and Enjoy::Catalog.configuration.category_image_styles
           enjoy_cms_attached_file(:image,
                     styles: lambda { |attachment| attachment.instance.image_styles }
           )
         end
       end
 
+      def item_class
+        Enjoy::Catalog::Item
+      end
+
       def image_styles
-        Enjoy::Catalog.configuration.item_image_styles
+        Enjoy::Catalog.configuration.category_image_styles
       end
 
       def image_jcrop_options
         {}
       end
+
     end
   end
 end

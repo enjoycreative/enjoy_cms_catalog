@@ -1,14 +1,14 @@
 require 'rails/generators'
 
 module Enjoy::Catalog::Models
-  class ItemImageGenerator < Rails::Generators::Base
+  class CategoryImageGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
     argument :class_name, type: :string
-    argument :item_class_name_arg, type: :string, default: ""
+    argument :category_class_name_arg, type: :string, default: ""
 
-    desc 'Enjoy::Catalog ItemImage Model generator'
-    def item_image
-      template 'item_image.erb', "app/models/#{file_name}.rb"
+    desc 'Enjoy::Catalog CategoryImage Model generator'
+    def category_image
+      template 'category_image.erb', "app/models/#{file_name}.rb"
     end
 
     private
@@ -32,12 +32,12 @@ module Enjoy::Catalog::Models
       underscored_class_name.pluralize
     end
 
-    def camelcased_item_class_name
-      item_class_name.camelcase
+    def camelcased_category_class_name
+      category_class_name.camelcase
     end
 
-    def item_class_name
-      item_class_name_arg.blank? ? camelcased_class_name.sub(/Image$/i, "") : item_class_name_arg
+    def category_class_name
+      category_class_name_arg.blank? ? camelcased_class_name.sub(/Image$/i, "") : category_class_name_arg
     end
   end
 end

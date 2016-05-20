@@ -1,16 +1,16 @@
-= render partial: "blocks/seo_block_with_obj", locals: {obj: @item_category}
+= render partial: "blocks/seo_block_with_obj", locals: {obj: @category}
 
 
 .ic_content
-  //- @item_categories.each do |ic|
-  //- root_catalog = ItemCategory.enabled.roots.sorted.all.to_a
+  //- @categories.each do |ic|
+  //- root_catalog = Enjoy::Catalog::Category.enabled.roots.sorted.all.to_a
   //- unless root_catalog.blank?
   
     //- root_catalog.each do |ic|
-  - label = @item_category.name
+  - label = @category.name
   h3.icpage_title = label
 
-  - unless @item_category.content.blank?
+  - unless @category.content.blank?
     .ic_description_block
       == @item_category.content
       - if @children.blank? or @items.blank?
@@ -81,4 +81,4 @@
 
   / - if @children.blank? and items.blank? and @item_category.content.blank?
     .items_block
-      h3= Settings.ns('item_categories').empty_category(default: "Приносим свои извинения. Страница находится на стадии разработки.", label: "Сообщение об отсутсвии товаров в категории", kind: :text)
+      h3= Settings.ns('enjoy_catalog.categories').empty_category(default: "Приносим свои извинения. Страница находится на стадии разработки.", label: "Сообщение об отсутсвии товаров в категории", kind: :text)
