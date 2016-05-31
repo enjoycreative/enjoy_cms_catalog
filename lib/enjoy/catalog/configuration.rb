@@ -25,6 +25,8 @@ module Enjoy::Catalog
     attr_accessor :seo_support
     attr_accessor :pages_support
 
+    attr_accessor :breadcrumbs_on_rails_support
+
     attr_accessor :can_connect_items_with_pages
     attr_accessor :can_connect_category_with_pages
 
@@ -44,6 +46,8 @@ module Enjoy::Catalog
       @gallery_support = defined?(Enjoy::Gallery)
       @seo_support = defined?(Enjoy::Seo)
       @pages_support = defined?(Enjoy::Pages)
+
+      @breadcrumbs_on_rails_support = defined?(BreadcrumbsOnRails)
 
       @can_connect_items_with_pages = true
       @can_connect_category_with_pages = true

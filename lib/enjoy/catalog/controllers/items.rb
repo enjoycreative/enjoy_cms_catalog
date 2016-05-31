@@ -3,6 +3,12 @@ module Enjoy::Catalog
     module Items
       extend ActiveSupport::Concern
 
+      included do
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+          add_breadcrumb I18n.t('enjoy.breadcrumbs.items'), :enjoy_items_path
+        end
+      end
+
       def index
         @item = item_class.enabled.sorted
 
@@ -17,6 +23,10 @@ module Enjoy::Catalog
         if @item and @item.text_slug != params[:id]
           redirect_to @item, status_code: 301
           return true
+        end
+
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+          add_breadcrumb @item.name, url_for(@item)
         end
       end
 
@@ -34,6 +44,7 @@ module Enjoy::Catalog
           super
         end
       end
+
     end
   end
 end

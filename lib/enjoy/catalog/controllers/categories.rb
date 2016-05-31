@@ -3,6 +3,12 @@ module Enjoy::Catalog
     module Categories
       extend ActiveSupport::Concern
 
+      included do
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+          add_breadcrumb I18n.t('enjoy.breadcrumbs.catalog'), :enjoy_catalog_path
+        end
+      end
+
       def index
         @categories = category_class.enabled.sorted.to_a
         @root_catalog = category_class.enabled.roots.sorted.all.to_a
@@ -19,6 +25,11 @@ module Enjoy::Catalog
 
         @children = @category.children.enabled.sorted.all.to_a
         @items = @category.items.enabled.sorted.all.to_a
+
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+          add_breadcrumb @category.name, url_for(@category)
+        end
+
 
         # index_crumbs
         # category_crumbs

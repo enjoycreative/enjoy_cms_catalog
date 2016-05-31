@@ -1,7 +1,11 @@
 ru:
   enjoy:
     catalog: Каталог
-    
+    breadcrumbs:
+      catalog: Каталог
+      categories: Категории
+      items: Товары
+
   mongoid:
     models:
       enjoy/catalog/item: Товары
