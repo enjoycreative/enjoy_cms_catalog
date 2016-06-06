@@ -36,6 +36,4 @@ Gem::Specification.new do |spec|
   # spec.add_dependency 'money', '6.7.0'
   spec.add_dependency 'money-rails'
   spec.add_dependency 'mongoid_money_field', '~> 5.0.0'
-
-  spec.add_dependency 'kaminari'
 end
