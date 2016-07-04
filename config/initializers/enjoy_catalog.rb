@@ -86,15 +86,3 @@ Enjoy.configure do |config|
     }
   end
 end
-
-if defined?(RailsAdmin)
-  RailsAdmin.config do |config|
-    config.excluded_models ||= []
-    if Enjoy::Catalog.mongoid?
-      config.excluded_models << [
-        'Enjoy::Catalog::ItemImage', 'Enjoy::Catalog::CategoryImage'
-      ]
-    end
-    config.excluded_models.flatten!
-  end
-end
