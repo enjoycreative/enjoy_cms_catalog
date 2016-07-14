@@ -39,6 +39,7 @@ module Enjoy::Catalog
               searchable :name
             end
             field :price, :string
+            # field :price, :money_field
 
             group :URL do
               active false

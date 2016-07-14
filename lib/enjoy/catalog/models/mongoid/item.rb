@@ -23,6 +23,7 @@ module Enjoy::Catalog
 
           has_and_belongs_to_many :related_items, :class_name => "Enjoy::Catalog::Item", :inverse_of => :related_items
 
+          # money_field :price, default_currency: nil
           field :price,     type: Money,    default: nil, localize: Enjoy::Catalog.configuration.localize
         end
       end

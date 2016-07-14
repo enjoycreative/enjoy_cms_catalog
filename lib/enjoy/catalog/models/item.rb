@@ -14,6 +14,7 @@ module Enjoy::Catalog
       if Enjoy::Catalog.config.gallery_support
         include Enjoy::Gallery::Paperclipable
       end
+      # include Mongoid::MoneyField
 
       include Enjoy::Catalog.orm_specific('Item')
 
