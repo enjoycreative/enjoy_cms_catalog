@@ -4,8 +4,8 @@ module Enjoy::Catalog
       extend ActiveSupport::Concern
 
       included do
-        if Enjoy::Catalog.config.breadcrumbs_on_rails_support and insert_breadcrumbs
-          add_breadcrumb I18n.t('enjoy.breadcrumbs.items'), :enjoy_items_path
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+          add_breadcrumb I18n.t('enjoy.breadcrumbs.items'), :enjoy_items_path if insert_breadcrumbs
         end
       end
 
@@ -25,8 +25,8 @@ module Enjoy::Catalog
           return true
         end
 
-        if Enjoy::Catalog.config.breadcrumbs_on_rails_support and insert_breadcrumbs
-          add_breadcrumb @item.name, url_for(@item)
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+          add_breadcrumb @item.name, url_for(@item) if insert_breadcrumbs
         end
       end
 
@@ -43,10 +43,6 @@ module Enjoy::Catalog
         else
           super
         end
-      end
-
-      def insert_breadcrumbs
-        true
       end
 
     end
