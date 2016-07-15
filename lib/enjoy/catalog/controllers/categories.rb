@@ -3,6 +3,10 @@ module Enjoy::Catalog
     module Categories
       extend ActiveSupport::Concern
 
+      def insert_breadcrumbs
+        true
+      end
+
       included do
         if Enjoy::Catalog.config.breadcrumbs_on_rails_support
           add_breadcrumb I18n.t('enjoy.breadcrumbs.catalog'), :enjoy_catalog_path if insert_breadcrumbs
@@ -49,10 +53,6 @@ module Enjoy::Catalog
       end
       def item_class
         Enjoy::Catalog::Item
-      end
-
-      def insert_breadcrumbs
-        true
       end
 
       # def index_crumbs
