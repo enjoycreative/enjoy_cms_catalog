@@ -3,18 +3,15 @@ module Enjoy::Catalog
     module Items
       extend ActiveSupport::Concern
 
-      def insert_breadcrumbs
-        true
-      end
-
       included do
         if Enjoy::Catalog.config.breadcrumbs_on_rails_support
-          add_breadcrumb I18n.t('enjoy.breadcrumbs.items'), :enjoy_items_path if insert_breadcrumbs
+          add_breadcrumb I18n.t('enjoy.breadcrumbs.items'), :enjoy_items_path, if: :insert_items_breadcrumbs
         end
       end
 
       def index
         @item = item_class.enabled.sorted
+        insert_category_breadcrumbs if insert_breadcrumbs
 
         unless Enjoy::Catalog.config.items_per_page.nil?
           @item = @item.page(params[:page])
@@ -30,7 +27,8 @@ module Enjoy::Catalog
         end
 
         if Enjoy::Catalog.config.breadcrumbs_on_rails_support
-          add_breadcrumb @item.name, url_for(@item) if insert_breadcrumbs
+          insert_category_breadcrumbs if insert_breadcrumbs
+          add_breadcrumb @item.name, url_for(@item), if: :insert_breadcrumbs
         end
       end
 
@@ -47,6 +45,15 @@ module Enjoy::Catalog
         else
           super
         end
+      end
+
+      def insert_breadcrumbs
+        true
+      end
+      def insert_items_breadcrumbs
+        true
+      end
+      def insert_category_breadcrumbs
       end
 
     end
