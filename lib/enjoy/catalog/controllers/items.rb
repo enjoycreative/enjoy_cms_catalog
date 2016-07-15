@@ -4,7 +4,7 @@ module Enjoy::Catalog
       extend ActiveSupport::Concern
 
       included do
-        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support and insert_breadcrumbs
           add_breadcrumb I18n.t('enjoy.breadcrumbs.items'), :enjoy_items_path
         end
       end
@@ -25,7 +25,7 @@ module Enjoy::Catalog
           return true
         end
 
-        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support and insert_breadcrumbs
           add_breadcrumb @item.name, url_for(@item)
         end
       end
@@ -38,11 +38,15 @@ module Enjoy::Catalog
         Enjoy::Catalog::Item
       end
       def page_title
-        if @item.class.name == model.name
+        if @item
           @item.page_title
         else
           super
         end
+      end
+
+      def insert_breadcrumbs
+        true
       end
 
     end

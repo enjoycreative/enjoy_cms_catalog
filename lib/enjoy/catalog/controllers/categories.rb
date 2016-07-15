@@ -4,7 +4,7 @@ module Enjoy::Catalog
       extend ActiveSupport::Concern
 
       included do
-        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support and insert_breadcrumbs
           add_breadcrumb I18n.t('enjoy.breadcrumbs.catalog'), :enjoy_catalog_path
         end
       end
@@ -26,7 +26,7 @@ module Enjoy::Catalog
         @children = @category.children.enabled.sorted.all.to_a
         @items = @category.items.enabled.sorted.all.to_a
 
-        if Enjoy::Catalog.config.breadcrumbs_on_rails_support
+        if Enjoy::Catalog.config.breadcrumbs_on_rails_support and insert_breadcrumbs
           add_breadcrumb @category.name, url_for(@category)
         end
 
@@ -49,6 +49,10 @@ module Enjoy::Catalog
       end
       def item_class
         Enjoy::Catalog::Item
+      end
+
+      def insert_breadcrumbs
+        true
       end
 
       # def index_crumbs
