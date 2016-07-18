@@ -34,28 +34,14 @@ module Enjoy::Catalog
             end
             group :URL do
               active false
-              field :slugs, :enum do
-                enum_method do
-                  :slugs
-                end
-                visible do
-                  bindings[:view].current_user.admin?
-                end
-                multiple do
-                  true
-                end
-              end
+              field :slugs, :enjoy_slugs
               field :text_slug
             end
 
 
             group :image do
               active false
-              field :image, :jcrop do
-                jcrop_options do
-                  :image_jcrop_options
-                end
-              end
+              field :image, :enjoy_image
               field :category_images
             end
 
