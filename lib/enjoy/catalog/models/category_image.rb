@@ -13,10 +13,6 @@ module Enjoy::Catalog
       def image_styles
         Enjoy::Catalog.configuration.category_images_image_styles
       end
-
-      def image_jcrop_options
-        {}
-      end
     end
   end
 end

@@ -14,9 +14,11 @@ module Enjoy::Catalog
           enjoy_cms_html_field :excerpt,   type: String, localize: Enjoy::Catalog.configuration.localize, default: ""
           enjoy_cms_html_field :content,   type: String, localize: Enjoy::Catalog.configuration.localize, default: ""
 
-          embeds_many :category_images, cascade_callbacks: true, class_name: "Enjoy::Catalog::CategoryImage"
-          alias :images :category_images
-          accepts_nested_attributes_for :category_images, allow_destroy: true
+          if Enjoy::Catalog.config.gallery_support
+            embeds_many :category_images, cascade_callbacks: true, class_name: "Enjoy::Catalog::CategoryImage"
+            alias :images :category_images
+            accepts_nested_attributes_for :category_images, allow_destroy: true
+          end
         end
 
         def items

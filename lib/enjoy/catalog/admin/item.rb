@@ -47,10 +47,12 @@ module Enjoy::Catalog
               field :text_slug
             end
 
-            group :image do
-              active false
-              field :image, :enjoy_image
-              field :item_images
+            if Enjoy::Catalog.config.gallery_support
+              group :image do
+                active false
+                field :image, :enjoy_image
+                field :item_images
+              end
             end
 
             group :content do
@@ -61,16 +63,18 @@ module Enjoy::Catalog
 
             Enjoy::RailsAdminGroupPatch::enjoy_cms_group(self, fields)
 
-            group :seo do
-              active false
-              field :seo do
-                active true
+            if Enjoy::Catalog.config.seo_support
+              group :seo do
+                active false
+                field :seo do
+                  active true
+                end
               end
-            end
-            group :sitemap_data do
-              active false
-              field :sitemap_data do
-                active true
+              group :sitemap_data do
+                active false
+                field :sitemap_data do
+                  active true
+                end
               end
             end
           end
